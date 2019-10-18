@@ -4,9 +4,9 @@
   <head>
     <meta charset="utf-8">
 
-    <title>XXXX</title>
+    <title>Clean Code</title>
 
-    <meta name="description" content="XXXX">
+    <meta name="description" content="Clean Code">
     <meta name="author" content="Natacha Beck">
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -16,8 +16,6 @@
 
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/night.css" id="theme">
-
-
 
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -46,16 +44,885 @@
 
         <!-- 1st slide-->
         <section>
-          <h2>XXX</h2>
+          <h2>Clean Code</h2>
           <p>
             <small><a href="https://github.com/natacha-beck/">Natacha Beck</a></small>
           </p>
         </section>
 
         <section>
-          <h3></h3>
+          <section>
+            <h3>Source</h3>
+            <ul>
+              <li><a target="_blank" href="https://learning.oreilly.com/videos/clean-code/9780134661742">O'REILLY Clean Code Video Series</a></li>
+              <li><a target="_blank" href="https://www.investigatii.md/uploads/resurse/Clean_Code.pdf">Clean Code Book</a></li>
+            </ul>
+
+            <div>
+              <img width="300" src="img/cc.png">
+            </div>
+            <center>
+              by Robert C. Martin
+            </center>
+          </section>
         </section>
-        
+
+
+        <section>
+          <img width="400" src="img/good_code.png">
+          <br>
+          xkcd.com
+        </section>
+
+        <section>
+          <h3>Citations</h3>
+            <blockquote>
+              Of course you have been impeded by bad code. So then—why did you write it?
+            </blockquote>
+            Robert C. Martin
+            <blockquote>
+              We are authors. And one thing about authors is that they have readers. Indeed, authors are responsible for communicating well with  their  readers.
+            </blockquote>
+            Robert C. Martin
+            <blockquote>
+              Any fool can write code a computer can understand. But it takes a good programmer to write code a human can understand.
+            </blockquote>
+            Martin Fowler
+        </section>
+
+        <section>
+          <h3>Contents</h3>
+          <ul>
+            <li>Names</li>
+            <li>Functions</li>
+            <li>Comments</li>
+            <li>Form</li>
+          </ul>
+        </section>
+      </section>
+
+        <section>
+          <section>
+            <h2>Names</h2>
+          </section>
+
+          <section>
+            <h3>Descriptive names</h3>
+            <ul>
+              <li>If you should add comment == BAD sign</li>
+              <li>Don't be too quick to choose a name</li>
+              <li>Keep them relevant</li>
+            </ul>
+<div class="cell">
+  <pre>
+    <code class="ruby">
+# The DATA_PARAMS array is used to
+# whitelist params for filtering.
+DATA_PARAMS =
+[
+  :date_attribute,
+  :absolute_or_relative_from,
+  :absolute_or_relative_to,
+  :relative_from,
+  :relative_to,
+  :absolute_from,
+  :absolute_to,
+]
+    </code>
+  </pre>
+</div>
+<div class="cell">
+  <pre>
+    <code class="ruby">
+WHITELIST_FILTERING_PARAMS =
+[
+  :date_attribute,
+  :absolute_or_relative_from,
+  :absolute_or_relative_to,
+  :relative_from,
+  :relative_to,
+  :absolute_from,
+  :absolute_to,
+]
+  </code>
+  </pre>
+</div>
+          </section>
+
+          <section>
+            <h3>Avoid disinformation</h3>
+            <ul>
+              <li>Use plural for a list and singular for a specific item
+                <pre>
+                  <code data-trim data-noescape class="ruby">
+animals =   ["rabbits","dog", "cat"]
+animals.map { |animal| puts animal }
+                  </code>
+                </pre>
+              </li>
+              <li>Avoid name with similar shape:
+                <ul>
+                  <li>
+
+                    <code>XYZControllerForEfficientHandlingOfStrings</code>
+                  </li>
+                  <li>
+                    <code>XYZControllerForEfficientStorageOfStrings</code>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Make meaningful distinctions</h3>
+            <ul>
+              <li>Do not use number series naming `a1, a2, a3...`</li>
+
+
+<div class="cell">
+  <pre>
+    <code class="ruby">
+  def copy_chars(a1, a2)
+    a1.each_with_index do |c,i|
+      a2[i] = c
+    end
+  end
+    </code>
+  </pre>
+</div>
+<div class="cell">
+  <pre>
+    <code class="ruby">
+def copy_chars(source, destination)
+  source.each_with_index do |c,i|
+    destination[i] = c
+  end
+end
+    </code>
+  </pre>
+</div>
+              <li>Do not use noise word like:
+                <ul>
+                  <li><code>UserData</code></li>
+                  <li><code>UserInfo</code></li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Use prononceable names</h3>
+            <ul>
+              <li>Words are by definition, prononceable</li>
+              <li>Programming is a social activity</li>
+              <li>You should be able to communicate with other developer</li>
+            </ul>
+
+<div class="cell">
+  <pre>
+    <code class="ruby">
+# Generate Timestamp as
+# year,  month,  day,  hour,  minute, and second
+def genymdhms
+
+end
+    </code>
+  </pre>
+</div>
+
+<div class="cell">
+  <pre>
+    <code class="ruby">
+# Generate Timestamp as
+# year,  month,  day,  hour,  minute, and second
+def generate_timestamp
+
+end
+    </code>
+  </pre>
+</div>
+
+          </section>
+
+          <section>
+            <h3>Use searchable names</h3>
+            <ul>
+              <li>Single-letter names and numeric constants, are not easy to locate</li>
+              <li>Single-letter names should only be used as local variable inside short methods</li>
+              <li>The length of a name should correspond to the size of its scope</li>
+            </ul>
+<div class="cell">
+  <pre>
+    <code class="ruby">
+weekly_salary = 5 * daily_salary
+    </code>
+  </pre>
+</div>
+
+<div class="cell">
+  <pre>
+    <code class="ruby">
+WORK_DAYS_PER_WEEK = 5
+weekly_salary      = WORK_DAYS_PER_WEEK * daily_salary
+    </code>
+  </pre>
+</div>
+          </section>
+
+          <section>
+            <h3>Class Names</h3>
+            <ul>
+              <li>Class and objects should have noun or noun phrase names</li>
+              <li>Should not be a verb</li>
+              <li>Example: <code>Customer</code> , <code>Account</code>...</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Method Names</h3>
+            <ul>
+              <li>Should have a verb or verb phrase names like: <code>save</code> , <code>delete_page</code></li>
+              <li>In some languages:
+                <ul>
+                  <li>Accesors: <code>get</code></li>
+                  <li>Mutators: <code>set</code></li>
+                  <li>Predicate: <code>is</code> or <code>*?</code></li>
+                  <li>Bang methods in ruby *!
+                    <pre>
+                      <code class="ruby">
+st = "This IS a String"
+st.downcase!
+puts st
+  > "this is a string"
+                      </code>
+                    </pre>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Use solution/problem domain names</h3>
+            <ul>
+              <li>Use computer science terms, algorithm names, pattern names, math terms
+                <br>
+                &nbsp&nbsp Ex: <code>BubbleSort</code></li>
+              <li>Use problem domain names
+                <br>
+                &nbsp&nbsp Ex: ORF, amino_acid, protein</li>
+              <li>Follow convention do not invente yours</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Use your IDE</h3>
+            <ul>
+              <li>Do not make it hard for the IDE to help you</li>
+              <li>Use searchable name</li>
+              <li>Do not use same prefix for every class</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h2>Functions</h2>
+          </section>
+
+          <section>
+            <h3>Size</h3>
+            <ul>
+              <li>No more than your screen size</li>
+              <li>In 80's it mean ~20 lines</li>
+              <pre>
+                <code class="ruby">
+# Model representing a user with normal rights.
+# Normal users only have access to resources they own or those
+# of projects they are members of.
+class NormalUser < User
+
+  Revision_info=CbrainFileRevision[__FILE__] #:nodoc:
+
+  def available_tools  #:nodoc:
+    Tool.where( ["tools.user_id = ? OR tools.group_id IN (?)", self.id, self.group_ids])
+  end
+
+  def available_groups  #:nodoc:
+    self.groups.where("groups.type <> 'EveryoneGroup'").where(:invisible => false)
+  end
+
+  def available_tasks  #:nodoc:
+    CbrainTask.where( ["cbrain_tasks.user_id = ? OR cbrain_tasks.group_id IN (?)", self.id, self.group_ids] )
+  end
+
+  def available_users  #:nodoc:
+    User.where( :id => self.id )
+  end
+
+  def accessible_sites #:nodoc:
+    Site.where( :id => (self.site_id || -1) )
+  end
+
+  def visible_users #:nodoc:
+    User.where("users.type <> 'AdminUser'")
+  end
+
+end
+                </code>
+              </pre>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Nested structure</h3>
+            <ul>
+              <li>Should not be large enough to contain nested structures</li>
+              <li>Keep indent level small (1 or 2, max 3)</li>
+            </ul>
+
+<div style="display: inline-block">
+  <pre>
+    <code class="ruby">
+  values = Array.new(10) { rand(-100..100)}
+  positive_and_pair_values = []
+    </code>
+  </pre>
+</div>
+
+<div class="cell">
+  <pre>
+    <code class="ruby">
+values.each do |value|
+  if value >= 0
+    if (value % 2) == 0
+      positive_and_pair_values << value
+    end
+  end
+end
+    </code>
+  </pre>
+</div>
+
+<div class="cell">
+  <pre>
+    <code class="ruby">
+values.each do |value|
+  if value >= 0 && (value % 2) == 0
+    positive_and_pair_values << value
+  end
+end
+
+values.each do |value|
+  next if value < 0
+  next if value % 2 != 0
+  positive_and_pair_values << value
+end
+
+positive_and_pair_values =
+ values.select { |value| value >= 0 && value % 2 == 0 }
+    </code>
+  </pre>
+</div>
+
+
+          </section>
+
+          <section>
+            <h3>Arguments</h3>
+            <ul>
+              <li>Should have a small number of arguments</li>
+              <li>No more than 3 arguments</li>
+<div class="cell">
+  <pre>
+    <code class="python">
+def distance(x1, y1, z1, x2, y2, z2):
+
+  d = math.sqrt(math.pow(x2 - x1, 2) +
+                math.pow(y2 - y1, 2) +
+                math.pow(z2 - z1, 2))
+  print("Distance is ")
+  print(d)
+
+x1 = 2
+y1 = -5
+z1 = 7
+x2 = 3
+y2 = 4
+z2 = 5
+
+distance(x1, y1, z1, x2, y2, z2)
+    </code>
+  </pre>
+</div>
+<div class="cell">
+  <pre>
+    <code class="python">
+class Point:
+  def __init__(self, x, y, z):
+    self.x = x
+    self.y = y
+    self.z = z
+
+# Function to find distance
+def distance(point_1, point_2):
+
+  d = math.sqrt(math.pow(point_2.x - point_1.x, 2) +
+                math.pow(point_2.y - point_1.y, 2) +
+                math.pow(point_2.z - point_1.z, 2))
+  print("Distance is ")
+  print(d)
+
+start_point = Point(2,-5,7)
+end_point   = Point(3,4,5)
+
+distance(start_point,end_point)
+    </code>
+  </pre>
+</div>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Arguments</h3>
+            <ul>
+              <li>No boolean arguments</li>
+<div class="cell">
+  <pre>
+    <code class="ruby">
+def do_something(with_log)
+  if with_log
+    # do stuff and record the log
+  else
+    # do stuff
+  end
+end
+    </code>
+  </pre>
+</div>
+<div class="cell">
+  <pre>
+    <code class="ruby">
+def do_something_with_log
+  # do stuff and record log
+end
+
+def do_something()
+  # do stuff
+end
+    </code>
+  </pre>
+</div>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Content</h3>
+            <ul>
+              <li>Should do one thing</li>
+              <li>They should do it well</li>
+              <li>They should do it only</li>
+            </ul>
+          </section>
+
+
+          <section>
+            <h3>Content</h3>
+            <ul>
+              <li>Have no side effect</li>
+              <li>Should describe everything that a function, variable, or class does</li>
+            </ul>
+<div class=cell>
+  <pre>
+    <code class="ruby">
+def valid_password?(user, password)
+  if user.password == password
+    Session.initialize()
+    return true
+  end
+  return false
+end
+    </code>
+  </pre>
+</div>
+<div class=cell>
+  <pre>
+    <code class="ruby">
+def valid_password_and_initialize_session(user, password)
+  if user.password == password
+    Session.initialize()
+    return true
+  end
+  return false
+end
+
+Session.initialize() if valid_password?(user, password)
+    </code>
+  </pre>
+</div>
+          </section>
+
+          <section>
+            <h3>DRY</h3>
+            <img src="img/DRY.png">
+          </section>
+
+          <section>
+            <h3>Dead function</h3>
+            <ul>
+              <li>Should be discard</li>
+              <li>Do not be afraid to delete it</li>
+              <li>Your control version system still remenbers it</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Iterative process</h3>
+            <ul>
+              <li>Start with a working code</li>
+              <li>Then:</li>
+              <ul>
+                <li>Split your function</li>
+                <li>Change names</li>
+                <li>Remove duplication</li>
+                <li>Re-order your methods</li>
+              </ul>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Comments</h2>
+            <blockquote>
+              The  proper use of comments is to compensate for our failure to express ourself in ncode.
+            </blockquote>
+            Robert C. Martin
+          </section>
+
+          <section>
+            <h2>Good comments</h2>
+          </section>
+
+          <section>
+            <h3>Legal comment</h3>
+            <pre>
+              <code data-trim data-noescape style="width: auto">
+
+#
+# CBRAIN Project
+#
+# Copyright (C) 2008-2012
+# The Royal Institution for the Advancement of Learning
+# McGill University
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h3>Explanation of intent</h3>
+            <pre>
+              <code class="perl">
+# 1)     |----------------|             first frame
+#               |-----------------|     second frame
+
+# 2)            |----------------|      first frame
+#        |-----------------|            second frame
+
+# 3)          |---------|               first frame
+#        |-----------------|            second frame
+
+# 4)    |-----------------|             first frame
+#         |---------|                   second frame
+$isoverlapping = 1 if (($currentframe->{"start"} <=  $frame -> {"start"}) and ($currentframe->{"end"} >=  $frame -> {"start"}));
+$isoverlapping = 1 if (($frame -> {"start"} <=  $currentframe->{"start"}) and ($frame -> {"end"} >=  $currentframe->{"start"}));
+$isoverlapping = 1 if (($frame -> {"start"} <=  $currentframe->{"start"}) and ($currentframe -> {"end"} <=  $frame->{"end"}));
+$isoverlapping = 1 if (($currentframe -> {"start"} <=  $frame->{"start"}) and ($frame -> {"end"} <=  $currentframe->{"end"}));
+              </code>
+            </pre>
+          </section>
+
+            <section>
+              <h3>Informative comment</h3>
+
+<pre>
+  <code data-trim data-noescape style="width: auto">
+die "Unparsable number '$x'\n"
+unless $x =~
+  m/^([\+\-]?)     # sign
+     ([\d\.]*)     # significand
+     (?:e(-?\d*))? # exponent
+  $/x;
+  </code>
+</pre>
+            </section>
+
+            <section>
+              <h3>Warning of consequence</h3>
+<pre>
+  <code class="ruby">
+# Do not run unless you have time
+describe Userfile do
+  it "Copying file should work with really big file too" do
+     # ...
+  end
+end
+  </code>
+</pre>
+            </section>
+
+            <section>
+              <h3>Best comment</h3>
+              <ul>
+                <li>Choose your words</li>
+                <li>Use correct grammar and punctuation</li>
+                <li>Be brief</li>
+              </ul>
+            </section>
+
+
+          <section>
+            <h2>Bad Comments</h2>
+          </section>
+
+          <section>
+            <h3>Make up bad code</h3>
+            <ul>
+              <li>If you take time to write comment to explain poor code</li>
+              <li>Take time to re write your code</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Redundant comment</h3>
+<div class="cell">
+  <pre>
+    <code class="ruby">
+default_project = current_project || current_user.own_group
+
+# DPs where people can move/copy/extract stuff
+writable_dps    = writable_data_providers(current_user)
+
+# DPs where people can upload stuff (subset of writable_dps)
+uploadable_dps  = uploadable_data_providers(current_user)
+    </code>
+  </pre>
+</div>
+<div class="cell">
+  <pre>
+    <code class="ruby">
+default_project = current_project || current_user.own_group
+writable_dps    = writable_data_providers(current_user)
+uploadable_dps  = uploadable_data_providers(current_user)
+    </code>
+  </pre>
+</div>
+          </section>
+
+<!--           <section>
+            <h3>Redundant comment</h3>
+<pre>
+  <code class="java">
+/**
+  * @param sellRequest
+  * @return
+  * @throws ManagedComponentException
+*/
+public SellResponse beginSellItem(SellRequest sellRequest)
+     throws ManagedComponentException
+  </code>
+</pre>
+          </section> -->
+
+          <section>
+            <h3>Commented out code</h3>
+<pre>
+  <code class="perl">
+if ( ($feature_annot_type eq "G" && $features_who_overlap->[3] eq "YES")      # Gene without intron
+  || ($feature_annot_type eq "E" && $features_who_overlap->[3] eq "YES")
+  || ($feature_annot_type eq "O" && $features_who_overlap->[2]->containStruc)) {   # First or last exon
+
+  if ($feature_annot_type eq "O" && $features_who_overlap->[2]->containStruc) {
+    $to_add++;
+    #push(@$new_sort,$annot)
+} elsif ( ( $feature_annot_type eq "G" )                                    # Gene whithout intron
+         || ( ($features_who_overlap->[4] eq "FIRST" || $features_who_overlap->[4] eq "LAST")
+         && ( ! ($max_annot < $features_min || $min_annot > $features_max)))) {
+
+  my $max_start = ( ( $features_min > $min_annot ) ? $features_min : $min_annot);
+  my $min_end   = ( ( $features_max < $max_annot ) ? $features_max : $max_annot );
+  $to_add++ if ($overlappingcutoff > ( $min_end - $max_start + 1));
+  #push(@$new_sort,$annot) if ($overlappingcutoff > ( $min_end - $max_start + 1));
+}
+  </code>
+</pre>
+          </section>
+
+          <section>
+            <h3>TO DO comment</h3>
+<pre>
+  <code class="perl">
+# TODO
+# Parameters that don't have (yet) options on the command-line
+my $EVALUE_THRESHOLD = "1e-11";
+  </code>
+</pre>
+          </section>
+
+          <section>
+            <h3>Obsolete comment</h3>
+            <ul>
+              <li>Propagates misinformation</li>
+              <li>Comment get old quickly</li>
+              <li>If you find obsolete comment: update it!</li>
+            </ul>
+          </section>
+
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Form</h2>
+          </section>
+
+          <section>
+            <h3>Purpose of formatting</h3>
+            <ul>
+              <li>It is too important to ignore</li>
+              <li>It is about communication</li>
+              <li>Readability of your code is important</li>
+            </ul>
+          </section>
+
+         <section>
+            <h3>The Stepdown Rule</h3>
+            <ul>
+              <li>Reading code form Top to Bottom</li>
+              <li>Important concept go up, detail go down</li>
+            <img width="300" src="img/Lorem_Ipsum_Article.png">
+            </ul>
+          </section>
+
+          <section>
+            <h3>Vertical alignement</h3>
+            <ul>
+              <li>Use blank line separate concept</li>
+              <li>Use it to  separate  package declaration, import(s), and each of the functions</li>
+              <li>Conceptual affinity, similar concept should be group together</li>
+
+<pre>
+  <code class="ruby">
+#Model representing user-defined tags.
+#
+#=Attributes:
+#[*name*] A string representing the name of the tag.
+#= Associations:
+#*Belongs* *to*:
+#* User
+#*Has* *and* *belongs* *to* *many*:
+#* Userfile
+class Tag < ActiveRecord::Base
+
+  Revision_info=CbrainFileRevision[__FILE__] #:nodoc:
+
+  validates_presence_of   :name, :user_id, :group_id
+  validates_uniqueness_of :name, :scope => :group_id
+  validates_format_of     :name,  :with => /\A[\w\-\=\.\+\?\!\s]*\z/,
+                                  :message  => 'only the following characters are valid: alphanumeric characters, spaces, _, -, =, +, ., ?, !'
+
+  has_and_belongs_to_many :userfiles
+  belongs_to              :user
+  belongs_to              :group
+
+  attr_accessible         :name, :user_id, :group_id
+
+  api_attr_visible        :name, :user_id, :group_id
+end
+
+  </code>
+</pre>
+
+            </ul>
+          </section>
+
+          <section>
+            <h3>Vertical distance</h3>
+            <ul>
+              <li>Variable should be declare as close to their usage as possible</li>
+              <li>Dependant function should be group together</li>
+            </ul>
+<pre>
+  <code class="perl">
+sub GetProteinForGeneWithoutIntrons {
+    my ($seq, $start, $end, $isMinus) = @_;
+
+    # 1. Make hyp prot def by blast
+    my $g_length =  !$isMinus ? $end - $start + 1 : $start - $end + 1;
+    my $nt_seq   =  !$isMinus ? uc(substr($seq, $start - 1 , $g_length)) : uc(substr($seq, $end - 1 , $g_length));
+       $nt_seq   =~ tr/ACGT/TGCA/ if $isMinus;
+       $nt_seq   = reverse $nt_seq        if $isMinus;
+
+    my $protein    = "";
+    foreach (my $i = 0; $i <= length($nt_seq) - 3; $i += 3) {
+        my $tri_nt   = uc (substr($nt_seq, $i , 3));
+        my $aa       = $CODON_TABLE->{$tri_nt} || "X";
+           $aa       = lc($aa) if $tri_nt eq "GTG" && $CODON_TABLE->{$tri_nt} eq "V";
+           $aa       = lc($aa) if $tri_nt eq "TTG";
+           $protein .= $aa;
+    }
+    return $protein;
+}
+  </code>
+</pre>
+          </section>
+
+          <section>
+            <h3>Horizontal density</h3>
+            <ul>
+              <li>Do not make your reader scroll</li>
+              <li>Can be used to accentuate certain structure</li>
+            </ul>
+
+<pre>
+    <code style="overflow-x: scroll; width: auto;" class="perl">
+  my ($ProtHMM,$lenHMM) = &CreateFileForHMMBuild($Align,$Introns,$i,$NbChange,$ShortName,$LenAli,$LenAdj_p,$LenAdj_n,$Dash_p,$Dash_n,$More_p,$More_n);
+    </code>
+</pre>
+<pre>
+    <code style="overflow-x: scroll; width: auto;" class="perl">
+  my ($ProtHMM,$lenHMM) = &CreateFileForHMMBuild(
+                            $Align,
+                            $Introns,
+                            $i,
+                            $NbChange,
+                            $ShortName,
+                            $LenAli,
+                            $LenAdj_p,$LenAdj_n,
+                            $Dash_p,$Dash_n,
+                            $More_p,$More_n
+                        );
+    </code>
+</pre>
+          </section>
+        </section>
+
         <!-- Thanks -->
         <section>
           <h2>Thanks!</h2>
@@ -63,6 +930,24 @@
             <li><a href="mailto:natacha.beck@mcgill.ca">natacha.beck@mcgill.ca</a></li>
             <li><a target="_blank" href="http://mcin-cnim.ca/">www.mcin-ncim.ca</a></li>
           </ul>
+        </section>
+
+        <section>
+          <img src="img/code_quality_1.png ">
+          <br>
+          xkcd.com
+        </section>
+
+        <section>
+          <img src="img/code_quality_2.png ">
+        <br>
+          xkcd.com
+        </section>
+
+        <section>
+          <img src="img/code_quality_3.png ">
+          <br>
+          xkcd.com
         </section>
       </div>
     </div>
@@ -96,54 +981,52 @@
 
     </script>
 
+  <style>
+    /* Text styles: em, strong, b, i */
+    .reveal em {
+      color: yellow;
+      font-style: normal;
+    }
+    .reveal strong {
+      color: #0ff;
+    }
+    .reveal b {
+      color: #00f;
+    }
+    .reveal i {
+      color: #f00;
+    }
+    /* Misc */
+    .reveal section img {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
 
-    <style>
-      /* Text styles: em, strong, b, i */
-      .reveal em {
-        color: yellow;
-        font-style: normal;
-      }
-      .reveal strong {
-        color: #0ff;
-      }
-      .reveal b {
-        color: #00f;
-      }
-      .reveal i {
-        color: #f00;
-      }
-      /* Misc */
-      .reveal section img {
-        background: transparent;
-        border: none;
-        box-shadow: none;
-      }
+    .reveal pre {
+      box-shadow: none;
+      margin: 20px;
+    }
 
-      .reveal pre {
-        box-shadow: none;
-        margin: 20px;
-      }
+    .reveal .cell {
+      display: table-cell;
+      border: none;
+      box-shadow: none;
+    }
+    .reveal th {
+      color: #0aa;
+    }
+    .reveal .transp {
+      background-color: transparent;
+    }
+    .reveal .smallcontent tr td {
+      font-size: 70%;
+    }
 
-      .reveal .cell {
-        display: table-cell;
-        border: none;
-        box-shadow: none;
-      }
-      .reveal th {
-        color: #0aa;
-      }
-      .reveal .transp {
-        background-color: transparent;
-      }
-      .reveal .smallcontent tr td {
-        font-size: 70%;
-      }
-
-      .reveal pre code {
-        width: max-content;
-      }
+    .reveal pre code {
+      width: max-content;
+    }
   </style>
-
 
   </body>
 </html>
