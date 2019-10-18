@@ -739,21 +739,6 @@ uploadable_dps  = uploadable_data_providers(current_user)
 </div>
           </section>
 
-<!--           <section>
-            <h3>Redundant comment</h3>
-<pre>
-  <code class="java">
-/**
-  * @param sellRequest
-  * @return
-  * @throws ManagedComponentException
-*/
-public SellResponse beginSellItem(SellRequest sellRequest)
-     throws ManagedComponentException
-  </code>
-</pre>
-          </section> -->
-
           <section>
             <h3>Commented out code</h3>
 <pre>
@@ -765,14 +750,15 @@ if ( ($feature_annot_type eq "G" && $features_who_overlap->[3] eq "YES")      # 
   if ($feature_annot_type eq "O" && $features_who_overlap->[2]->containStruc) {
     $to_add++;
     #push(@$new_sort,$annot)
-} elsif ( ( $feature_annot_type eq "G" )                                    # Gene whithout intron
+  } elsif ( ( $feature_annot_type eq "G" )                                    # Gene whithout intron
          || ( ($features_who_overlap->[4] eq "FIRST" || $features_who_overlap->[4] eq "LAST")
          && ( ! ($max_annot < $features_min || $min_annot > $features_max)))) {
 
-  my $max_start = ( ( $features_min > $min_annot ) ? $features_min : $min_annot);
-  my $min_end   = ( ( $features_max < $max_annot ) ? $features_max : $max_annot );
-  $to_add++ if ($overlappingcutoff > ( $min_end - $max_start + 1));
-  #push(@$new_sort,$annot) if ($overlappingcutoff > ( $min_end - $max_start + 1));
+    my $max_start = ( ( $features_min > $min_annot ) ? $features_min : $min_annot);
+    my $min_end   = ( ( $features_max < $max_annot ) ? $features_max : $max_annot );
+    $to_add++ if ($overlappingcutoff > ( $min_end - $max_start + 1));
+    #push(@$new_sort,$annot) if ($overlappingcutoff > ( $min_end - $max_start + 1));
+  }
 }
   </code>
 </pre>
