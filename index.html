@@ -109,7 +109,6 @@
           <section>
             <h3>Descriptive names</h3>
             <ul>
-              <li>If you should add comment == BAD sign</li>
               <li>Don't be too quick to choose a name</li>
               <li>Keep them relevant</li>
             </ul>
@@ -160,7 +159,7 @@ animals.map { |animal| puts animal }
                   </code>
                 </pre>
               </li>
-              <li>Avoid name with similar shape:
+              <li>Avoid names with similar shapes:
                 <ul>
                   <li>
 
@@ -177,7 +176,7 @@ animals.map { |animal| puts animal }
           <section>
             <h3>Make meaningful distinctions</h3>
             <ul>
-              <li>Do not use number series naming `a1, a2, a3...`</li>
+              <li>Do not use number series naming e.g. `a1, a2, a3...`</li>
 
 
 <div class="cell">
@@ -248,8 +247,8 @@ end
           <section>
             <h3>Use searchable names</h3>
             <ul>
-              <li>Single-letter names and numeric constants, are not easy to locate</li>
-              <li>Single-letter names should only be used as local variable inside short methods</li>
+              <li>Single-letter names and numeric constants are not easy to locate</li>
+              <li>Single-letter names should only be used as local variables inside short methods</li>
               <li>The length of a name should correspond to the size of its scope</li>
             </ul>
 <div class="cell">
@@ -275,20 +274,24 @@ weekly_salary      = WORK_DAYS_PER_WEEK * daily_salary
             <ul>
               <li>Class and objects should have noun or noun phrase names</li>
               <li>Should not be a verb</li>
-              <li>Example: <code>Customer</code> , <code>Account</code>...</li>
+              <li>Example: <code>Customer</code>, <code>Account</code>...</li>
             </ul>
           </section>
 
           <section>
             <h3>Method Names</h3>
             <ul>
-              <li>Should have a verb or verb phrase names like: <code>save</code> , <code>delete_page</code></li>
+              <li>Should have verb or verb phrase names like:
+                <ul>
+                  <li><code>save</code></li>
+                  <li><code>delete_page</code></li>
+                </ul>
               <li>In some languages:
                 <ul>
                   <li>Accesors: <code>get</code></li>
                   <li>Mutators: <code>set</code></li>
-                  <li>Predicate: <code>is</code> or <code>*?</code></li>
-                  <li>Bang methods in ruby *!
+                  <li>Predicate: <code>is</code> or <code>abc?</code></li>
+                  <li>Bang methods in ruby abc!
                     <pre>
                       <code class="ruby">
 st = "This IS a String"
@@ -304,15 +307,15 @@ puts st
           </section>
 
           <section>
-            <h3>Use solution/problem domain names</h3>
+            <h3>Use names associated with a domain</h3>
             <ul>
               <li>Use computer science terms, algorithm names, pattern names, math terms
                 <br>
-                &nbsp&nbsp Ex: <code>BubbleSort</code></li>
+                &nbsp&nbsp Example: <code>BubbleSort</code></li>
               <li>Use problem domain names
                 <br>
-                &nbsp&nbsp Ex: ORF, amino_acid, protein</li>
-              <li>Follow convention do not invente yours</li>
+                &nbsp&nbsp Examples: ORF, amino_acid, protein</li>
+              <li>Follow conventions, do not invente yours</li>
             </ul>
           </section>
 
@@ -320,8 +323,8 @@ puts st
             <h3>Use your IDE</h3>
             <ul>
               <li>Do not make it hard for the IDE to help you</li>
-              <li>Use searchable name</li>
-              <li>Do not use same prefix for every class</li>
+              <li>Use searchable names</li>
+              <li>Do not use same prefix for every identifier</li>
             </ul>
           </section>
 
@@ -329,14 +332,14 @@ puts st
 
         <section>
           <section>
-            <h2>Functions</h2>
+            <h2>Functions/Methods</h2>
           </section>
 
           <section>
             <h3>Size</h3>
             <ul>
               <li>No more than your screen size</li>
-              <li>In 80's it mean ~20 lines</li>
+              <li>In the 80's it meant ~20 lines</li>
               <pre>
                 <code class="ruby">
 # Model representing a user with normal rights.
@@ -391,7 +394,6 @@ end
     </code>
   </pre>
 </div>
-
 <div class="cell">
   <pre>
     <code class="ruby">
@@ -519,17 +521,17 @@ end
           </section>
 
           <section>
-            <h3>Content</h3>
+            <h3>Function content</h3>
             <ul>
               <li>Should do one thing</li>
               <li>They should do it well</li>
-              <li>They should do it only</li>
+              <li>Should only do it</li>
             </ul>
           </section>
 
 
           <section>
-            <h3>Content</h3>
+            <h3>Function content</h3>
             <ul>
               <li>Have no side effect</li>
               <li>Should describe everything that a function, variable, or class does</li>
@@ -550,6 +552,7 @@ end
 <div class=cell>
   <pre>
     <code class="ruby">
+# Solution 1
 def valid_password_and_initialize_session(user, password)
   if user.password == password
     Session.initialize()
@@ -558,6 +561,7 @@ def valid_password_and_initialize_session(user, password)
   return false
 end
 
+# Solution 2
 Session.initialize() if valid_password?(user, password)
     </code>
   </pre>
@@ -570,11 +574,11 @@ Session.initialize() if valid_password?(user, password)
           </section>
 
           <section>
-            <h3>Dead function</h3>
+            <h3>Dead functions</h3>
             <ul>
-              <li>Should be discard</li>
-              <li>Do not be afraid to delete it</li>
-              <li>Your control version system still remenbers it</li>
+              <li>Should be discarded</li>
+              <li>Do not be afraid</li>
+              <li>Your version control system still remenbers them</li>
             </ul>
           </section>
 
@@ -586,7 +590,7 @@ Session.initialize() if valid_password?(user, password)
               <ul>
                 <li>Split your function</li>
                 <li>Change names</li>
-                <li>Remove duplication</li>
+                <li>Remove duplications</li>
                 <li>Re-order your methods</li>
               </ul>
             </ul>
@@ -597,7 +601,7 @@ Session.initialize() if valid_password?(user, password)
           <section>
             <h2>Comments</h2>
             <blockquote>
-              The  proper use of comments is to compensate for our failure to express ourself in ncode.
+              The  proper use of comments is to compensate for our failure to express ourself in code.
             </blockquote>
             Robert C. Martin
           </section>
@@ -677,7 +681,8 @@ unless $x =~
               <h3>Warning of consequence</h3>
 <pre>
   <code class="ruby">
-# Do not run unless you have time
+# Only run this test if you have set aside
+# enough memory and time
 describe Userfile do
   it "Copying file should work with really big file too" do
      # ...
@@ -688,7 +693,7 @@ end
             </section>
 
             <section>
-              <h3>Best comment</h3>
+              <h3>Good comments</h3>
               <ul>
                 <li>Choose your words</li>
                 <li>Use correct grammar and punctuation</li>
@@ -702,15 +707,14 @@ end
           </section>
 
           <section>
-            <h3>Make up bad code</h3>
+            <h3>Indicative of bad code</h3>
             <ul>
-              <li>If you take time to write comment to explain poor code</li>
-              <li>Take time to re write your code</li>
+              <li>If you take time to write comments to explain poor code, take time to re write your code</li>
             </ul>
           </section>
 
           <section>
-            <h3>Redundant comment</h3>
+            <h3>Redundant comments</h3>
 <div class="cell">
   <pre>
     <code class="ruby">
@@ -786,11 +790,11 @@ my $EVALUE_THRESHOLD = "1e-11";
           </section>
 
           <section>
-            <h3>Obsolete comment</h3>
+            <h3>Obsolete comments</h3>
             <ul>
-              <li>Propagates misinformation</li>
-              <li>Comment get old quickly</li>
-              <li>If you find obsolete comment: update it!</li>
+              <li>Propagate misinformation</li>
+              <li>Comments get old quickly</li>
+              <li>If you find obsolete comments: update it!</li>
             </ul>
           </section>
 
@@ -814,8 +818,8 @@ my $EVALUE_THRESHOLD = "1e-11";
          <section>
             <h3>The Stepdown Rule</h3>
             <ul>
-              <li>Reading code form Top to Bottom</li>
-              <li>Important concept go up, detail go down</li>
+              <li>Reading code from Top to Bottom</li>
+              <li>Important concept go at the top, details go at the bottom</li>
             <img width="300" src="img/Lorem_Ipsum_Article.png">
             </ul>
           </section>
@@ -823,9 +827,9 @@ my $EVALUE_THRESHOLD = "1e-11";
           <section>
             <h3>Vertical alignement</h3>
             <ul>
-              <li>Use blank line separate concept</li>
-              <li>Use it to  separate  package declaration, import(s), and each of the functions</li>
-              <li>Conceptual affinity, similar concept should be group together</li>
+              <li>Use blank lines to separate concepts</li>
+              <li>Use them to separate package declarations, import, and functions</li>
+              <li>Conceptual affinity, similar concepts should be grouped together</li>
 
 <pre>
   <code class="ruby">
@@ -865,8 +869,8 @@ end
           <section>
             <h3>Vertical distance</h3>
             <ul>
-              <li>Variable should be declare as close to their usage as possible</li>
-              <li>Dependant function should be group together</li>
+              <li>Variables should be declared as close to their usage as possible</li>
+              <li>Dependant functions should be grouped together</li>
             </ul>
 <pre>
   <code class="perl">
