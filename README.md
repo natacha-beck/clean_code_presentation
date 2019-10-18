@@ -1,4 +1,4 @@
-# my_reveal_template
-A really basic template for my reveal presentation.
+# ADM Clean Code presentation
+A presentation about the Clean Code book by Robert C. Martin.
 
-Presentation about: <a href="http://natacha-beck.github.io/clean_code_presentation/#/" target="_blank">XXXX</a>.
+Presentation about: <a href="http://natacha-beck.github.io/clean_code_presentation/#/" target="_blank">Clean Code</a>.
